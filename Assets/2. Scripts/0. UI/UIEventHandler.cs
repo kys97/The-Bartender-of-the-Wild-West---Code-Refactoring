@@ -25,7 +25,7 @@ public class UIEventHandler : MonoBehaviour
         entry_PointerUp.callback.AddListener((data) => { OnPointerUp((PointerEventData)data); });
         eventTrigger.triggers.Add(entry_PointerUp);
 
-#elif UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
+#elif UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX || UNITY_WEBGL
         EventTrigger.Entry entry_PointerEnter = new EventTrigger.Entry();
         entry_PointerEnter.eventID = EventTriggerType.PointerEnter;
         entry_PointerEnter.callback.AddListener((data) => { OnPointerEnter((PointerEventData)data); });
