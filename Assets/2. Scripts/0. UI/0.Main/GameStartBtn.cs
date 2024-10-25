@@ -9,6 +9,6 @@ public class GameStartBtn : UIEventHandler
 {
     protected override void OnPointerClick(PointerEventData data)
     {
-        SceneManager.LoadScene("1_Level");
+        SceneManager.LoadScene(EnumManager.SceneName.Level.ToString());
     }
 }
