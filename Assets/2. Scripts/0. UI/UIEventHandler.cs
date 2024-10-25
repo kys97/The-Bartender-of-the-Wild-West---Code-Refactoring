@@ -48,16 +48,18 @@ public class UIEventHandler : MonoBehaviour
     protected virtual void OnPointerDown(PointerEventData data)
     {
         transform.localScale = originalScale * 1.2f;
+        PlayButtonSFX();
     }
     protected virtual void OnPointerUp(PointerEventData data)
     {
         transform.localScale = originalScale;
     }
 
- #elif UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
+#elif UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
     protected virtual void OnPointerEnter(PointerEventData data)
     {
         transform.localScale = originalScale * 1.2f;
+        PlayButtonSFX();
     }
     protected virtual void OnPointerExit(PointerEventData data)
     {
@@ -71,4 +73,5 @@ public class UIEventHandler : MonoBehaviour
         // UI Å¬¸¯
     }
 
+    protected void PlayButtonSFX() { GameManager.Instance.GetAudioManager.PlaySFX(EnumManager.SFXAudioName.Button.ToString()); }
 }

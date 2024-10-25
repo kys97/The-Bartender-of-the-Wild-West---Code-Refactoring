@@ -16,6 +16,10 @@ public class TutorialBtn : UIEventHandler
 
     protected override void OnPointerClick(PointerEventData data)
     {
+        // Sound
+        GameManager.Instance.GetAudioManager.PlaySFX(EnumManager.SFXAudioName.Tutorial.ToString());
+        
+        // Scene
         Tutorial_Panel.SetActive(true);
     }
 }

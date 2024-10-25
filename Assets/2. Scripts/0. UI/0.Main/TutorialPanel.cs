@@ -20,6 +20,8 @@ public class TutorialPanel : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        GameManager.Instance.GetAudioManager.PlaySFX(EnumManager.SFXAudioName.Button.ToString());
+
         if(++tutorial_index < GameManager.Instance.GetResourceManager.TutorialImageList.Length)
             TutorialImage.sprite = GameManager.Instance.GetResourceManager.TutorialImageList[tutorial_index];
         else

@@ -33,6 +33,7 @@ public static class EnumManager
         Milk,
         Poisn,
         EasterEgg,
+        Button,
         Count
     }
 }
