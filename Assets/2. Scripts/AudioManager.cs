@@ -1,16 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     Dictionary<string, AudioClip> BGMList;
     Dictionary<string, AudioClip> SFXList;
 
-    AudioSource audioSource;
+    AudioSource bgmAudioSource;
+    AudioSource sfxAudioSource;
 
     public void Init()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
+        bgmAudioSource = gameObject.AddComponent<AudioSource>();
+        sfxAudioSource = gameObject.AddComponent<AudioSource>();
 
         BGMList = new Dictionary<string, AudioClip>();
         SFXList = new Dictionary<string, AudioClip>();
@@ -33,17 +36,24 @@ public class AudioManager : MonoBehaviour
     public void SetBGM(string BGMName)
     {
         BGMList.TryGetValue(BGMName, out AudioClip bgm);
-        audioSource.clip = bgm;
-        audioSource.Play();
+
+        if (bgmAudioSource.isPlaying)
+            bgmAudioSource.Stop();
+        
+        bgmAudioSource.clip = bgm;
+        bgmAudioSource.loop = true;
+        bgmAudioSource.Play();
     }
 
-    void Start()
+    public void PlaySFX(string sfxName)
     {
-        
-    }
+        SFXList.TryGetValue(sfxName, out AudioClip sfx);
 
-    void Update()
-    {
-        
+        if (sfxAudioSource.isPlaying)
+            sfxAudioSource.Stop();
+
+        sfxAudioSource.clip = sfx;
+        sfxAudioSource.loop = false;
+        sfxAudioSource.Play();
     }
 }
