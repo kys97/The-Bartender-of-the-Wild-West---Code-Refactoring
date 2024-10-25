@@ -47,6 +47,7 @@ public class UIEventHandler : MonoBehaviour
 #if UNITY_ANDROID || UNITY_IOS
     protected virtual void OnPointerDown(PointerEventData data)
     {
+        transform.SetAsLastSibling();
         transform.localScale = originalScale * 1.2f;
         PlayButtonSFX();
     }
@@ -58,6 +59,7 @@ public class UIEventHandler : MonoBehaviour
 #elif UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
     protected virtual void OnPointerEnter(PointerEventData data)
     {
+        transform.SetAsLastSibling();
         transform.localScale = originalScale * 1.2f;
         PlayButtonSFX();
     }

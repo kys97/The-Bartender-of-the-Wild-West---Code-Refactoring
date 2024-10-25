@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
 
     #region Singleton & Game Initialization
+    
     private static GameManager instance;
     public static GameManager Instance
     {
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
         }
         else if(scene.name == EnumManager.SceneName.Level.ToString())
         {
-            
+            // Nothing to do
         }
         else if (scene.name == EnumManager.SceneName.Game.ToString())
         {
@@ -76,6 +77,14 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
+    #region Game
+
+    public static int GameLevel;
+
+
+    #endregion
+
 
     void Start()
     {
