@@ -1,5 +1,10 @@
+using Unity.Burst.CompilerServices;
+
 public static class EnumManager
 {
+    public const int SEAT = 4;
+    public const int WANTED = 2;
+    
     public enum SceneName
     {
         Main,
@@ -7,6 +12,12 @@ public static class EnumManager
         Game,
         Result,
         Count
+    }
+
+    public enum GameState
+    {
+        Playing,
+        GameOver
     }
 
     public enum BGMAudioName
@@ -36,4 +47,6 @@ public static class EnumManager
         Button,
         Count
     }
+
+    
 }

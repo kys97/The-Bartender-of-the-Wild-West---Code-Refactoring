@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static EnumManager;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -69,6 +72,9 @@ public class GameManager : MonoBehaviour
         {
             // Game BGM Play
             GetAudioManager.SetBGM(EnumManager.BGMAudioName.GameBGM.ToString());
+
+            // Game Init
+            GameInit();
         }
         else if (scene.name == EnumManager.SceneName.Result.ToString())
         {
@@ -76,15 +82,49 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void GameInit()
+    {
+        // Game Data Init
+        Money = 0;
+        for (int i=0; i < WANTED; i++)
+        {
+            WantedCriminals[i] = 0;
+        }
+        for(int i=0; i < SEAT; i++)
+        {
+            CustomerSeat[i] = 0;
+        }
+
+        // UI Init Action
+        OnUIInit?.Invoke();
+
+        // Game Start
+        State = GameState.Playing;
+    }
+
     #endregion
 
     #region Game
 
-    public static int GameLevel;
+    public static int GameLevel = 1;
+    public static GameState State = GameState.GameOver;
+    public static int Money = 0;
+
+    public int[] WantedCriminals = new int[WANTED];
+    public int[] CustomerSeat = new int[SEAT];
+
+    public static event Action OnDrinkMade;
+    public static event Action<Customer> OnServeDrink; // 
+    public static event Action<int> OnResultSet;
 
 
     #endregion
 
+    #region Action & Event
+
+    public static event Action OnUIInit;
+
+    #endregion
 
     void Start()
     {
