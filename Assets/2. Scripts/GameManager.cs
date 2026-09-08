@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
 
     #region Scene Initialization
 
-    private bool isFirstLoad = true;
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == EnumManager.SceneName.Main.ToString())
@@ -128,17 +127,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if(true)
-        {
-            // First Scene Load
-            OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
-            isFirstLoad = false;
-        }
-    }
-
-    void Update()
-    {
-        
+        // First Scene Load
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     private void OnDestroy()

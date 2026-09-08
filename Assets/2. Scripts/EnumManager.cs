@@ -1,5 +1,3 @@
-using Unity.Burst.CompilerServices;
-
 public static class EnumManager
 {
     public const int SEAT = 4;

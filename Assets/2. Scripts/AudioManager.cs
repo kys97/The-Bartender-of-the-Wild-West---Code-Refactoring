@@ -1,59 +1,53 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    Dictionary<string, AudioClip> BGMList;
-    Dictionary<string, AudioClip> SFXList;
+    private Dictionary<string, AudioClip> bgmClips;
+    private Dictionary<string, AudioClip> sfxClips;
 
-    AudioSource bgmAudioSource;
-    AudioSource sfxAudioSource;
+    private AudioSource bgmAudioSource;
+    private AudioSource sfxAudioSource;
 
     public void Init()
     {
         bgmAudioSource = gameObject.AddComponent<AudioSource>();
         sfxAudioSource = gameObject.AddComponent<AudioSource>();
 
-        BGMList = new Dictionary<string, AudioClip>();
-        SFXList = new Dictionary<string, AudioClip>();
-
-        LoadBGM();
+        bgmClips = LoadClips("1. Audio/BGM");
+        sfxClips = LoadClips("1. Audio/SFX");
     }
 
-    void LoadBGM()
+    private static Dictionary<string, AudioClip> LoadClips(string path)
     {
-        foreach(AudioClip audio in Resources.LoadAll<AudioClip>("1. Audio/BGM"))
+        AudioClip[] clips = Resources.LoadAll<AudioClip>(path);
+        var clipsByName = new Dictionary<string, AudioClip>(clips.Length);
+        foreach (AudioClip clip in clips)
         {
-            BGMList.Add(audio.name, audio);
+            clipsByName.Add(clip.name, clip);
         }
-        foreach (AudioClip audio in Resources.LoadAll<AudioClip>("1. Audio/SFX"))
-        {
-            SFXList.Add(audio.name, audio);
-        }
+        return clipsByName;
     }
 
     public void SetBGM(string BGMName)
     {
-        BGMList.TryGetValue(BGMName, out AudioClip bgm);
-
-        if (bgmAudioSource.isPlaying)
-            bgmAudioSource.Stop();
-        
-        bgmAudioSource.clip = bgm;
-        bgmAudioSource.loop = true;
-        bgmAudioSource.Play();
+        bgmClips.TryGetValue(BGMName, out AudioClip bgm);
+        PlayClip(bgmAudioSource, bgm, true);
     }
 
     public void PlaySFX(string sfxName)
     {
-        SFXList.TryGetValue(sfxName, out AudioClip sfx);
+        sfxClips.TryGetValue(sfxName, out AudioClip sfx);
+        PlayClip(sfxAudioSource, sfx, false);
+    }
 
-        if (sfxAudioSource.isPlaying)
-            sfxAudioSource.Stop();
+    private static void PlayClip(AudioSource source, AudioClip clip, bool loop)
+    {
+        if (source.isPlaying)
+            source.Stop();
 
-        sfxAudioSource.clip = sfx;
-        sfxAudioSource.loop = false;
-        sfxAudioSource.Play();
+        source.clip = clip;
+        source.loop = loop;
+        source.Play();
     }
 }

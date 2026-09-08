@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,23 +9,8 @@ public class ResourceManager : MonoBehaviour
 
     public void Init()
     {
-        SpriteSetting();
-    }
-
-    void Start()
-    {
-
-    }
-
-    void SpriteSetting()
-    {
         TutorialImageList = Resources.LoadAll<Sprite>("2. Sprite/Tutorial");
-
-        CustomerList = new List<Sprite>();
-        foreach(Sprite customer in Resources.LoadAll<Sprite>("2. Sprite/Customer"))
-        {
-            CustomerList.Add(customer);
-        }
+        CustomerList = new List<Sprite>(Resources.LoadAll<Sprite>("2. Sprite/Customer"));
 
         DrinkList = new Dictionary<string, Sprite>();
         foreach(Sprite drink in Resources.LoadAll<Sprite>("2. Sprite/Bottle"))

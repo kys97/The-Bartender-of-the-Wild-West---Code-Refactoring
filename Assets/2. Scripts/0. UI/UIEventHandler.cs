@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -56,7 +53,7 @@ public class UIEventHandler : MonoBehaviour
         transform.localScale = originalScale;
     }
 
-#elif UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
+#elif UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX || UNITY_WEBGL
     protected virtual void OnPointerEnter(PointerEventData data)
     {
         transform.SetAsLastSibling();
